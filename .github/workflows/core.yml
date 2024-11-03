@@ -8,7 +8,7 @@ on: push
 
 jobs:
   pytest:
-    runs-on: ubuntu:24.04
+    runs-on: ubuntu-24.04
     container:
       image: python:latest
     steps:
@@ -22,7 +22,7 @@ jobs:
           hatch env run --env test -- pytest
 
   mypy:
-    runs-on: ubuntu:24.04
+    runs-on: ubuntu-24.04
     container:
       image: python:latest
     steps:
@@ -36,7 +36,7 @@ jobs:
           hatch env run --env mypy -- mypy .
 
   license:
-    runs-on: ubuntu:24.04
+    runs-on: ubuntu-24.04
     container:
       image: fsfe/reuse
     steps:
