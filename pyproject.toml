@@ -12,15 +12,14 @@ authors = [
 { name = "Jayesh Badwaik", email = "jayesh@ambhora.com" },
 ]
 dependencies = [
-  "semver",
-  "livereload"
+  "semver"
 ]
 
 [project.urls]
 Source = "https://githug.com/mori-org/mori"
 
 [project.scripts]
-mori = "mori:main"
+mori = "mori.cli:main"
 
 # --------------------------------------------------------------------------------------------------
 # Hatch configuration

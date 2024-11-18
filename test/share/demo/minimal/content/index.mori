@@ -1,0 +1,24 @@
+\doctype{homepage}
+
+\title{Minimal Demo}
+
+\begin{document}
+\maketitle
+
+This is the minimal demo of the Mori document system. It is a simple document
+with a single section and a single paragraph.
+
+\section{Introduction}
+
+#begin(abstract)
+#end(abstract)
+
+This is the introduction to the document. It is a single paragraph that
+describes the purpose of the document. The purpose of this document is to
+demonstrate the basic features of the Mori document system.
+
+This is the end of the document.
+
+
+
+\end{document}
