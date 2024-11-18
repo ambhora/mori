@@ -12,7 +12,8 @@ authors = [
 { name = "Jayesh Badwaik", email = "jayesh@ambhora.com" },
 ]
 dependencies = [
-  "semver"
+  "semver",
+  "livereload"
 ]
 
 [project.urls]

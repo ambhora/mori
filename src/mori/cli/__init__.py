@@ -7,6 +7,7 @@ import argparse
 import os
 import sys
 import mori
+import logging
 
 
 class DirInfo:
@@ -55,6 +56,8 @@ def top_level_parser():
         formatter_class=make_wide(argparse.ArgumentDefaultsHelpFormatter),
     )
 
+    parser.add_argument("--logfile", help="log file", default=None)
+
     subparser = parser.add_subparsers(dest="subcommand", required=True)
     serve_parser = subparser.add_parser("serve", help="serve the website")
     define_serve_parser(serve_parser)
@@ -65,20 +68,21 @@ def top_level_parser():
 def main():
     dirinfo = DirInfo(os.path.realpath(sys.argv[0]))
 
-    try:
-        raw_args = sys.argv[1:]
-        parser = top_level_parser()
-        cli_args = parser.parse_args(raw_args)
+    raw_args = sys.argv[1:]
+    parser = top_level_parser()
+    cli_args = parser.parse_args(raw_args)
 
+    if cli_args.logfile:
+        print(f"mori: logging to {cli_args.logfile}")
+
+    try:
         match cli_args.subcommand:
             case "serve":
                 mori.server.serve_cli(dirinfo, cli_args)
+    finally:
+        exit(os.EX_OK)
 
-    except ValueError as e:
-        print("Error: ", e)
-        print(parser.print_help())
-        exit(os.EX_USAGE)
-    #except Exception as e:
+    # except Exception as e:
     #    print("Bug encountered: ", e)
     #    exit(os.EX_SOFTWARE)
 

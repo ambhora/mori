@@ -3,7 +3,7 @@
 # Copyright (C) 2024 Jayesh Badwaik <jayesh@ambhora.com>
 # --------------------------------------------------------------------------------------------------
 
-import mori.compiler
+import livereload
 import socketserver
 import http.server
 import posixpath
@@ -21,16 +21,12 @@ def serve_cli(dirinfo, cli_args):
     serve(params)
 
 
-class http_server(http.server.HTTPServer):
-    def __init__(self, root_path, *args, **kwargs):
-        self.root_path = root_path
-        super().__init__(*args, **kwargs)
-
-    def finish_request(self, request, client_address):
-        self.RequestHandlerClass(request, client_address, self, directory=self.root_path)
+class server_param:
+    def __init__(self):
+        self.input_dir = os.getcwd()
 
 
-def serve(input_dir, compile_options, server_options):
+def serve(params):
     """
     Serve the project as a website:
 
@@ -46,6 +42,11 @@ def serve(input_dir, compile_options, server_options):
         The input directory for the mori project.
 
     """
-    server_address = ("", params["port"])
-    httpd = http_server(params["input_dir"], server_address, http.server.SimpleHTTPRequestHandler)
-    httpd.serve_forever()
+
+    server = livereload.Server()
+    server.watch(params["input_dir"], livereload.shell('echo "index.html changed"'))
+    server.serve(root=params["input_dir"], port=params["port"])
+
+
+def log():
+    print("Change detected")

@@ -4,7 +4,7 @@
 # --------------------------------------------------------------------------------------------------
 
 [website]
-baseURL = 'https://mori-org.github.io/'
+baseURL = 'https://ambhora.github.io/mori/'
 title = "mori"
 description = 'A Static Site Generator for Technical Writing'
 languageCode = 'en-us'
